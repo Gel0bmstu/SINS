@@ -7,6 +7,6 @@
 
 ![](https://i.imgur.com/0jo9ZPM.png)
 
-Отчет по данной работе находится в корне репозитория, файл *Отчет.docs*
-#####Файл с данными БЧЭ доступен по ссылке: https://drive.google.com/file/d/1kjIbTQUI0a0h3cCy8DjMXWdUoXGpTzaL/view?usp=sharing
+Отчет по данной работе находится в корне репозитория, файл *Отчет.docs*.
+####Файл с данными БЧЭ доступен по ссылке: https://drive.google.com/file/d/1kjIbTQUI0a0h3cCy8DjMXWdUoXGpTzaL/view?usp=sharing
 

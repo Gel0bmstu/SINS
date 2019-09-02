@@ -2,7 +2,7 @@ IMU_Il.dat
 debug.dat
 res.dat
 BINS_ALG.sdf
-./ipch/
-./Debug/
-./vs/
+ipch/
+Debug/
+.vs/
 BINS_ALG.VC.opendb

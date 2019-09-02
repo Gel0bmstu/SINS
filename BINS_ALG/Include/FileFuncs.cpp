@@ -12,26 +12,25 @@ using namespace std;
 
 // -------------------------------------------------------------------------------------------------------
 
-// ��������������� ���� ������� ��� algorithmControll()
+// Вспомогательный блок функций для algorithmControll()
 
-// ����� �������� � ������� � ����� ������
+// Вывод данных в консоль на одной строке
 
 double
 z;
 HANDLE
 myConsole;
 
-// ������� ��� ������ ������� � ����� ������
+// Установка каретки консоли в нужное положение
 void SetTextCurPos(short col, short row) {
 	myConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-	// �������� ��������� ������ � �������� ������� �������.
 	COORD Coor;
 	Coor.X = col; Coor.Y = row;
 	SetConsoleCursorPosition(myConsole, Coor);
 }
 
+// Включить / Выключить видимость каретки
 void SetTextCurVisibility(bool vsbl) {
-	// ������ ��������� ������ ������� ��������� (vsbl=FALSE) ��� ������� (vsbl=TRUE)
 	CONSOLE_CURSOR_INFO info;
 	info.dwSize = 2; info.bVisible = vsbl;
 	SetConsoleCursorInfo(myConsole, &info);
@@ -40,7 +39,7 @@ void SetTextCurVisibility(bool vsbl) {
 // -------------------------------------------------------------------------------------------------------
 
 
-// ������� �������� �����
+// Функция пропуска строки
 int skipLine(FILE **pFile)
 {
     char Symb;
@@ -56,7 +55,7 @@ int skipLine(FILE **pFile)
 }
 //--------------------------------------------------------------------
 
-// ������ ����, ���������� ������ � ��������� ��������� � ����
+// Чтение айла с данными БЧЭ
 double readFile() {
     double time;
     int num = fscanf_s(Source, "%lf %lf %lf %lf %lf %lf %lf %*lf",
@@ -68,35 +67,28 @@ double readFile() {
 }
 //--------------------------------------------------------------------
 
-// ������ ����, ���������� ������ � ������� ������ � ���������� �������
-//void getAngels() {
-//	int num = fscanf_s(Vels, "%lf %lf %lf",
-//		&Angls.teta, &Angls.gamma, &Angls.psi);
-//}
-//--------------------------------------------------------------------
-
-// ������ ����, ���������� ������ � ������� ������ � �������� ������� �������� ������� �� �������������� ��
+// Получение значнеий проекций путеой скорости ЛА на географическую СК
 void getVels() {
 	int num = fscanf_s(Vels, "%lf %lf %lf %lf %lf",
 		&V.fi, &V.la, &V.Vn, &V.Vup, &V.Ve);
 }
 //--------------------------------------------------------------------
 
-// ���������/������� ����� ��� ������ ��������� ������ / ������ ���������� ������ ����
+// Открытие / Создание файлов, для чтения / записи данных
 void filePreparation() {
-	// ���� ���������� ��������� ������ �������� � ������������ �������
+	// Файл с кратким результатом работы алгоритма
 	fopen_s(&result, "res.dat", "w+");
 	fprintf(result, "  TIME            psi         teta       gamma      fi         la\n");
 
-	// ���� ���������� ��������� ������ �������� �� ����� ������� ��� �������
+	// Файл с плным результатом, удобный для отладки
 	fopen_s(&Debug, "debug.dat", "w+");
 	fprintf(Debug, "  TIME            psi         teta       gamma      fi         la         azm        Ax_x         Ay_x         Az_x        Ax_g         Ay_g         Az_g         Vn_g         Vup_g         Ve_g         Wx_g         Wy_g         Wz_g\n");
 
-	// ������ ������ ������ � ���
+	// Исходный файл с данными БЧЭ
 	fopen_s(&Source, "IMU_Il.dat", "r");
 	skipLine(&Source);
 
-	// ������ ������ � ���������
+	// Файл со скоростями, полученными с БЧЭ
 	fopen_s(&Vels, "vel.txt", "r");
 	skipLine(&Vels);
 
@@ -105,7 +97,7 @@ void filePreparation() {
 }
 //--------------------------------------------------------------------
 
-// ������ ���������� ������ ��������� � ����� res.dat � debug.dat
+// Запись результата работы алгоритма в файлы res.dat и debug.dat
 void writeFile() {
 	if (record && (current_time > (int)current_time && current_time < (int)current_time + 2 * delta_t)) {
 		fprintf(result, "  %lf        %.10lf    %.10lf    %.10lf   %.10lf    %.10lf\n",

@@ -35,6 +35,7 @@ void skewMx(double Mx[9], double Vr[3])
 	Mx[6] = Vr[1];   Mx[7] = -Vr[0];  Mx[8] = 0;
 }
 
+// Интегрирование кинематического уравнения Пуасона
 void fpoIntegrate(double* m, double* w, double dt) {
 	double* E = new double[9];
 	double* tmp = new double[9];
